@@ -41,7 +41,7 @@ struct WordInfo
   double edge_prob() const {
     return ( edge_ne + 1.0 ) / ( total + 2.0 );
   }
-  bool operator<(const WordInfo & x) {
+  bool operator<(const WordInfo & x) const {
     //    return this->out_prob() > x.out_prob();
     return this->edge_prob() > x.edge_prob();
   }
@@ -304,7 +304,7 @@ struct Annotation
   int begin;
   int end;
   double prob;
-  bool operator<(const Annotation & x) { return prob > x.prob; }
+  bool operator<(const Annotation & x) const { return prob > x.prob; }
   Annotation(const int l, const int b, const int e, const double p) :
     label(l), begin(b), end(e), prob(p) {}
 };
@@ -395,12 +395,8 @@ void load_ne_models()
 }
 
 
-int netagging(vector<Token> & vt)
+void netagging(vector<Token> & vt)
 {
-
   find_NEs(ne_model, vt);
-
-  
-  
 }
 
